@@ -21,35 +21,11 @@ collections:
             widget: "list"
             summary: "{{fields.title}}"
             fields:
-              - label: "Proje Adı"
-                name: "title"
-                widget: "string"
-                hint: "Örn: Sessiz Saat"
-              - label: "Kategori"
-                name: "category"
-                widget: "select"
-                options:
-                  - { label: "Video", value: "video" }
-                  - { label: "Fotoğraf", value: "photo" }
-                  - { label: "Marka Filmi", value: "brand" }
-                  - { label: "Reklam", value: "ads" }
-              - label: "Görsel"
-                name: "image"
-                widget: "image"
-                required: false
-                hint: "Projeye ait fotoğraf veya video küçük resmi"
-              - label: "Director's Note"
-                name: "note"
-                widget: "text"
-                hint: "Kısa, vurucu bir cümle. Örn: Işığın peşinde, hikâyenin merkezinde."
-              - label: "Yükseklik (px)"
-                name: "height"
-                widget: "number"
-                default: 280
-                value_type: "int"
-                min: 180
-                max: 500
-                hint: "Masonry grid'deki kart yüksekliği"
+              - {label: "Proje Adı", name: "title", widget: "string"}
+              - {label: "Kategori", name: "category", widget: "select", options: [{label: "Video", value: "video"},{label: "Fotoğraf", value: "photo"},{label: "Marka Filmi", value: "brand"},{label: "Reklam", value: "ads"}]}
+              - {label: "Görsel / Video", name: "image", widget: "image", required: false}
+              - {label: "Director's Note", name: "note", widget: "text"}
+              - {label: "Yükseklik (px)", name: "height", widget: "number", default: 280, value_type: "int", min: 180, max: 500}
 
   - name: "settings"
     label: "Site Ayarları"
@@ -59,35 +35,12 @@ collections:
         file: "data/settings.json"
         format: json
         fields:
-          - label: "Slogan"
-            name: "slogan"
-            widget: "string"
-            default: "Ekipman değil, vizyon."
-          - label: "Kısa Açıklama (Hero)"
-            name: "heroDesc"
-            widget: "text"
-            default: "Biz sadece video çekmiyoruz. Işığı yönetiyor, anı kurguluyoruz ve markanın ruhunu sinematik bir dille anlatıyoruz."
-          - label: "Showreel URL (Vimeo veya YouTube)"
-            name: "showreelUrl"
-            widget: "string"
-            required: false
-          - label: "E-posta"
-            name: "email"
-            widget: "string"
-            default: "merhaba@foxcreative.co"
-          - label: "Telefon"
-            name: "phone"
-            widget: "string"
-            default: "+90 500 123 45 67"
-          - label: "Şehir"
-            name: "city"
-            widget: "string"
-            default: "İstanbul, Türkiye"
-          - label: "Instagram Linki"
-            name: "instagram"
-            widget: "string"
-            required: false
-          - label: "Vimeo Linki"
-            name: "vimeo"
-            widget: "string"
-            required: false
+          - {label: "Slogan", name: "slogan", widget: "string"}
+          - {label: "Hero Açıklaması", name: "heroDesc", widget: "text"}
+          - {label: "Showreel URL", name: "showreelUrl", widget: "string", required: false}
+          - {label: "E-posta", name: "email", widget: "string"}
+          - {label: "Telefon", name: "phone", widget: "string"}
+          - {label: "Şehir", name: "city", widget: "string"}
+          - {label: "Instagram", name: "instagram", widget: "string", required: false}
+          - {label: "Vimeo", name: "vimeo", widget: "string", required: false}
+          - {label: "Logo Görseli", name: "logoImage", widget: "image", required: false, hint: "PNG veya SVG. Şeffaf arka plan önerilir."}
