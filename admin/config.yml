@@ -8,24 +8,34 @@ public_folder: "/images/uploads"
 locale: tr
 
 collections:
-  - name: "projects"
-    label: "Projeler"
+  - name: "brands"
+    label: "Klasörler"
     files:
-      - label: "Proje Listesi"
-        name: "projects"
-        file: "data/projects.json"
+      - label: "Klasör Listesi"
+        name: "brands"
+        file: "data/brands.json"
         format: json
         fields:
-          - label: "Projeler"
+          - label: "Klasörler"
             name: "items"
             widget: "list"
-            summary: "{{fields.title}}"
+            summary: "{{fields.name}} ({{fields.type}})"
             fields:
-              - {label: "Proje Adı", name: "title", widget: "string"}
-              - {label: "Kategori", name: "category", widget: "select", options: [{label: "Video", value: "video"},{label: "Fotoğraf", value: "photo"},{label: "Marka Filmi", value: "brand"},{label: "Reklam", value: "ads"}]}
-              - {label: "Görsel / Video", name: "image", widget: "image", required: false}
-              - {label: "Director's Note", name: "note", widget: "text"}
-              - {label: "Yükseklik (px)", name: "height", widget: "number", default: 280, value_type: "int", min: 180, max: 500}
+              - {label: "Klasör Adı", name: "name", widget: "string", hint: "Örn: Nike, Zara, Marka A"}
+              - label: "Tür"
+                name: "type"
+                widget: "select"
+                options:
+                  - {label: "Fotoğraf Klasörü", value: "photo"}
+                  - {label: "Video Klasörü", value: "video"}
+              - {label: "Kapak Görseli", name: "cover", widget: "image", required: false}
+              - label: "İçerikler"
+                name: "items"
+                widget: "list"
+                summary: "{{fields.caption}}"
+                fields:
+                  - {label: "Görsel / Video", name: "image", widget: "image"}
+                  - {label: "Açıklama", name: "caption", widget: "string", required: false}
 
   - name: "settings"
     label: "Site Ayarları"
@@ -43,4 +53,4 @@ collections:
           - {label: "Şehir", name: "city", widget: "string"}
           - {label: "Instagram", name: "instagram", widget: "string", required: false}
           - {label: "Vimeo", name: "vimeo", widget: "string", required: false}
-          - {label: "Logo Görseli", name: "logoImage", widget: "image", required: false, hint: "PNG veya SVG. Şeffaf arka plan önerilir."}
+          - {label: "Logo Görseli", name: "logoImage", widget: "image", required: false}
