@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0a0a0a">
+<title>Fox Creative — Ekipman Değil, Vizyon.</title>
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#0a0a0a;--anth:#1a1a1e;--anth2:#252529;
+  --white:#f5f4f0;--dim:rgba(245,244,240,0.55);
+  --amber:#F5A623;--orange:#E8611A;
+  --radius:14px;--radius-sm:8px;
+  --ease:cubic-bezier(0.76,0,0.24,1);
+  --px:clamp(20px,5vw,56px);--spy:clamp(72px,10vw,140px);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--black);color:var(--white);font-family:'DM Sans',sans-serif;font-weight:300;overflow-x:hidden}
+@media(pointer:fine){body{cursor:none}}
+img{display:block;max-width:100%;height:auto}
+button{font-family:inherit;border:none;background:none;cursor:pointer}
+a{text-decoration:none;color:inherit}
+
+body::after{
+  content:'';position:fixed;inset:0;z-index:9998;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity:.42;
+}
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:var(--black)}
+::-webkit-scrollbar-thumb{background:var(--amber);border-radius:2px}
+
+/* CURSOR */
+#cursor,#cursor-ring{display:none}
+@media(pointer:fine){
+  #cursor{display:block;position:fixed;z-index:10000;width:10px;height:10px;background:var(--amber);border-radius:50%;pointer-events:none;transform:translate(-50%,-50%);transition:width .3s var(--ease),height .3s var(--ease),background .3s;mix-blend-mode:difference}
+  #cursor.hov{width:38px;height:38px;background:var(--orange)}
+  #cursor-ring{display:block;position:fixed;z-index:9999;width:34px;height:34px;border:1px solid rgba(245,166,35,.45);border-radius:50%;pointer-events:none;transform:translate(-50%,-50%)}
+}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:24px var(--px);transition:background .5s,padding .4s}
+nav.scrolled{background:rgba(10,10,10,.93);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);padding:16px var(--px);border-bottom:1px solid rgba(255,255,255,.05)}
+.nav-logo{display:flex;align-items:center;gap:10px}
+.nav-logo-text{font-family:'Bebas Neue',sans-serif;font-size:clamp(18px,2.5vw,22px);letter-spacing:3px;line-height:1}
+.nav-logo-text span{color:var(--amber)}
+.nav-links{display:flex;gap:36px;list-style:none;align-items:center}
+.nav-links a{color:var(--dim);font-size:11px;letter-spacing:2.5px;text-transform:uppercase;font-weight:400;transition:color .3s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--amber);transition:width .4s var(--ease)}
+.nav-links a:hover{color:var(--white)}
+.nav-links a:hover::after{width:100%}
+.nav-cta{color:var(--black)!important;background:var(--amber);padding:9px 22px;border-radius:100px;font-size:11px;letter-spacing:2px;font-weight:500!important;transition:background .3s,transform .2s!important}
+.nav-cta::after{display:none!important}
+.nav-cta:hover{background:var(--orange)!important;color:var(--white)!important;transform:scale(1.03)}
+.hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;width:40px;height:40px;padding:8px;border-radius:var(--radius-sm);transition:background .3s;-webkit-tap-highlight-color:transparent}
+.hamburger:hover{background:rgba(255,255,255,.06)}
+.hamburger span{display:block;width:22px;height:1.5px;background:var(--white);border-radius:2px;transition:transform .4s var(--ease),opacity .3s;transform-origin:center}
+.hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+.mobile-menu{display:none;position:fixed;inset:0;z-index:999;background:rgba(10,10,10,.97);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);flex-direction:column;align-items:center;justify-content:center;gap:36px;opacity:0;pointer-events:none;transition:opacity .4s var(--ease)}
+.mobile-menu.open{opacity:1;pointer-events:all}
+.mobile-menu a{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,8vw,52px);font-weight:300;color:var(--dim);letter-spacing:-1px;transition:color .3s,transform .3s;transform:translateY(20px)}
+.mobile-menu.open a{transform:translateY(0)}
+.mobile-menu a:hover{color:var(--amber)}
+.mm-cta{color:var(--black)!important;background:linear-gradient(135deg,var(--amber),var(--orange));padding:14px 40px;border-radius:100px;font-family:'DM Sans',sans-serif!important;font-size:13px!important;letter-spacing:2px;font-weight:500!important}
+@media(max-width:900px){.nav-links{display:none}.hamburger{display:flex}.mobile-menu{display:flex}}
+
+/* HERO */
+#hero{position:relative;height:100svh;min-height:600px;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-end;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:linear-gradient(135deg,#0f0f0f 0%,#1a0f05 40%,#0a0808 100%)}
+.hero-bg::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 70% 40%,rgba(232,97,26,.12) 0%,transparent 65%),radial-gradient(ellipse 60% 80% at 20% 80%,rgba(245,166,35,.07) 0%,transparent 60%);animation:glow 8s ease-in-out infinite alternate}
+@keyframes glow{0%{opacity:.7;transform:scale(1)}100%{opacity:1;transform:scale(1.05)}}
+.hero-film{position:absolute;inset:0;pointer-events:none;background-image:repeating-linear-gradient(90deg,transparent,transparent 98px,rgba(255,255,255,.015) 98px,rgba(255,255,255,.015) 100px)}
+.hero-showreel{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px}
+.play-btn{width:72px;height:72px;border:1.5px solid rgba(245,166,35,.6);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:transform .3s var(--ease),border-color .3s;animation:pulse 3s ease-in-out infinite;-webkit-tap-highlight-color:transparent}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(245,166,35,.15)}50%{box-shadow:0 0 0 20px rgba(245,166,35,0)}}
+.play-label{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--dim)}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,10,10,.95) 0%,rgba(10,10,10,.25) 55%,rgba(10,10,10,.08) 100%)}
+.hero-content{position:relative;z-index:2;padding:0 var(--px) clamp(48px,8vw,80px);max-width:min(900px,95vw)}
+.hero-eyebrow{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--amber);margin-bottom:20px;opacity:0;animation:fadeUp 1s .3s var(--ease) forwards}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(52px,10vw,130px);font-weight:300;line-height:.92;letter-spacing:-2px;margin-bottom:24px;opacity:0;animation:fadeUp 1s .5s var(--ease) forwards}
+.hero-title em{font-style:italic;color:var(--amber)}
+.hero-sub{font-size:clamp(14px,1.8vw,16px);font-weight:300;line-height:1.8;color:var(--dim);max-width:500px;margin-bottom:36px;opacity:0;animation:fadeUp 1s .7s var(--ease) forwards}
+.hero-actions{display:flex;gap:16px;align-items:center;flex-wrap:wrap;opacity:0;animation:fadeUp 1s .88s var(--ease) forwards}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--amber),var(--orange));color:var(--black);padding:clamp(13px,2vw,16px) clamp(24px,3vw,36px);border-radius:100px;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:500;transition:transform .3s var(--ease),box-shadow .3s;box-shadow:0 8px 32px rgba(245,166,35,.22);-webkit-tap-highlight-color:transparent}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(245,166,35,.32)}
+.btn-primary:active{transform:scale(.97)}
+.btn-ghost{display:inline-flex;align-items:center;gap:8px;color:var(--dim);font-size:11px;letter-spacing:2px;text-transform:uppercase;padding:13px 0;transition:color .3s;-webkit-tap-highlight-color:transparent}
+.btn-ghost:hover{color:var(--white)}
+.hero-scroll{position:absolute;bottom:28px;right:var(--px);z-index:2;display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fadeIn 1s 1.2s forwards}
+.scroll-line{width:1px;height:50px;background:linear-gradient(to bottom,transparent,var(--amber));animation:scrollPulse 2s ease-in-out infinite}
+@keyframes scrollPulse{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}50.01%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+.scroll-text{writing-mode:vertical-rl;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--dim)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@media(max-width:480px){.hero-scroll{display:none}}
+
+/* MARQUEE */
+#strip{background:var(--anth);padding:20px 0;overflow:hidden}
+.marquee{display:flex;gap:48px;align-items:center;animation:marquee 22s linear infinite;width:max-content;white-space:nowrap}
+.marquee:hover{animation-play-state:paused}
+.mi{font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:4px;color:var(--dim);display:flex;align-items:center;gap:48px}
+.md{width:5px;height:5px;border-radius:50%;background:var(--amber);flex-shrink:0}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* SECTIONS */
+.wrap{max-width:1400px;margin:0 auto;padding:0 var(--px)}
+.s-label{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--amber);margin-bottom:16px;display:flex;align-items:center;gap:12px}
+.s-label::before{content:'';width:28px;height:1px;background:var(--amber)}
+.s-head{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5.5vw,72px);font-weight:300;line-height:1.05;letter-spacing:-1px}
+.s-head em{font-style:italic;color:var(--amber)}
+.rev{opacity:0;transform:translateY(36px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.rev.vis{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
+
+/* ABOUT */
+#about{padding:var(--spy) 0}
+.about-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:clamp(40px,7vw,100px);align-items:center}
+.about-frame{position:relative;border-radius:var(--radius);overflow:hidden;aspect-ratio:4/5;background:var(--anth)}
+.about-frame::before{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(135deg,rgba(232,97,26,.18) 0%,rgba(245,166,35,.04) 100%)}
+.about-inner{width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(160deg,#1a0f05,#0d0d0d,#1a0a00);font-family:'Cormorant Garamond',serif;font-size:clamp(60px,10vw,100px);font-weight:300;font-style:italic;color:rgba(245,166,35,.07);letter-spacing:-5px}
+.about-badge{position:absolute;bottom:-16px;right:-16px;z-index:2;background:var(--amber);color:var(--black);padding:16px 22px;border-radius:var(--radius-sm);font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:500;line-height:1.7}
+.about-badge strong{display:block;font-family:'Bebas Neue',sans-serif;font-size:clamp(22px,4vw,30px);letter-spacing:1px}
+.about-body{font-family:'Cormorant Garamond',serif;font-size:clamp(17px,1.8vw,22px);font-weight:300;line-height:1.75;color:var(--dim);margin:28px 0 0}
+.about-body strong{color:var(--white);font-weight:400}
+.about-quote{font-family:'Cormorant Garamond',serif;font-size:clamp(24px,3vw,38px);font-weight:300;font-style:italic;line-height:1.3;color:var(--white);border-left:2px solid var(--amber);padding-left:24px;margin:32px 0}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding-top:32px;border-top:1px solid rgba(255,255,255,.07);margin-top:36px}
+.stat-num{font-family:'Bebas Neue',sans-serif;font-size:clamp(38px,5vw,52px);line-height:1;background:linear-gradient(135deg,var(--amber),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.stat-lbl{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-top:4px}
+@media(max-width:900px){.about-grid{grid-template-columns:1fr;gap:60px}.about-frame{max-width:420px;margin:0 auto}.about-badge{right:0}}
+@media(max-width:480px){.about-badge{right:0;bottom:-12px;padding:12px 16px}.stats{gap:16px}}
+
+/* DIVIDER */
+.ornament{display:flex;align-items:center;gap:20px;padding:0 var(--px);opacity:.18}
+.ornament span{flex:1;height:1px;background:var(--white)}
+.ornament em{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;white-space:nowrap}
+
+/* WORKS */
+#works{padding:var(--spy) 0}
+.works-header{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:20px}
+.works-sub{font-size:14px;line-height:1.8;color:var(--dim);max-width:340px}
+.filter-bar{display:flex;gap:8px;flex-wrap:wrap;margin:clamp(28px,4vw,48px) 0}
+.fbtn{padding:9px 20px;border-radius:100px;border:1px solid rgba(255,255,255,.12);background:transparent;color:var(--dim);font-size:10px;letter-spacing:2px;text-transform:uppercase;transition:all .3s;font-family:'DM Sans',sans-serif;-webkit-tap-highlight-color:transparent}
+.fbtn.on,.fbtn:hover{background:var(--amber);border-color:var(--amber);color:var(--black)}
+.fbtn:active{transform:scale(.96)}
+.masonry{columns:3;column-gap:18px}
+@media(max-width:900px){.masonry{columns:2;column-gap:14px}}
+@media(max-width:520px){.masonry{columns:1}}
+.mitem{break-inside:avoid;margin-bottom:18px;border-radius:var(--radius);overflow:hidden;position:relative;cursor:pointer;background:var(--anth);transition:transform .5s var(--ease);-webkit-tap-highlight-color:transparent}
+.mitem:hover{transform:scale(.982)}
+.mitem:active{transform:scale(.96)}
+.mitem:hover .mov{opacity:1}
+.mitem:hover .mnote{transform:translateY(0);opacity:1}
+.mthumb{width:100%;display:block;object-fit:cover}
+.mthumb-placeholder{width:100%;display:flex;align-items:center;justify-content:center;font-size:48px}
+.mov{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,10,10,.95) 0%,rgba(10,10,10,.15) 60%,transparent 100%);opacity:0;transition:opacity .4s;display:flex;flex-direction:column;justify-content:flex-end;padding:22px}
+@media(hover:none){.mov{opacity:1}}
+.mcat{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--amber);margin-bottom:6px}
+.mtitle{font-family:'Cormorant Garamond',serif;font-size:clamp(17px,2vw,22px);font-weight:300;color:var(--white);margin-bottom:6px}
+.mnote{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:12px;line-height:1.6;color:rgba(245,244,240,.62);border-top:1px solid rgba(255,255,255,.1);padding-top:10px;margin-top:2px;transform:translateY(8px);opacity:0;transition:transform .4s var(--ease),opacity .4s}
+@media(hover:none){.mnote{transform:translateY(0);opacity:1}}
+.mbadge{position:absolute;top:12px;right:12px;background:rgba(10,10,10,.72);backdrop-filter:blur(8px);padding:4px 10px;border-radius:100px;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);display:flex;align-items:center;gap:5px}
+.bdot{width:4px;height:4px;border-radius:50%;background:var(--amber)}
+#gallery-loading{text-align:center;padding:60px 0;color:var(--dim);font-size:13px;letter-spacing:2px;text-transform:uppercase}
+
+/* SERVICES */
+#services{padding:var(--spy) 0;background:var(--anth)}
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:clamp(40px,5vw,64px);border-radius:var(--radius);overflow:hidden}
+@media(max-width:900px){.svc-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.svc-grid{grid-template-columns:1fr;border-radius:var(--radius-sm)}}
+.svc{background:var(--anth2);padding:clamp(28px,4vw,52px) clamp(22px,3vw,40px);position:relative;overflow:hidden;transition:background .4s}
+.svc::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--amber),var(--orange));transform:scaleX(0);transform-origin:left;transition:transform .5s var(--ease)}
+.svc:hover::before{transform:scaleX(1)}
+.svc:hover{background:rgba(245,166,35,.04)}
+.svc-num{font-family:'Bebas Neue',sans-serif;font-size:56px;line-height:1;color:rgba(245,166,35,.08);position:absolute;top:24px;right:24px;transition:color .4s}
+.svc:hover .svc-num{color:rgba(245,166,35,.16)}
+.svc-icon{font-size:26px;margin-bottom:22px}
+.svc-name{font-family:'Cormorant Garamond',serif;font-size:clamp(20px,2.2vw,28px);font-weight:300;margin-bottom:12px}
+.svc-desc{font-size:clamp(12px,1.4vw,14px);line-height:1.8;color:var(--dim)}
+
+/* PROCESS */
+#process{padding:var(--spy) 0}
+.proc-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(24px,4vw,48px);margin-top:clamp(40px,5vw,64px);position:relative}
+@media(max-width:900px){.proc-steps{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.proc-steps{grid-template-columns:1fr;gap:28px}}
+.proc-steps::before{content:'';position:absolute;top:24px;left:48px;right:48px;height:1px;background:linear-gradient(90deg,transparent,rgba(245,166,35,.28),transparent)}
+@media(max-width:900px){.proc-steps::before{display:none}}
+.pstep{text-align:center}
+.pnum{width:48px;height:48px;border:1px solid rgba(245,166,35,.4);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 24px;font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--amber);position:relative;z-index:1;background:var(--black);transition:background .3s,transform .3s}
+.pstep:hover .pnum{background:var(--amber);color:var(--black);transform:scale(1.08)}
+.ptitle{font-family:'Cormorant Garamond',serif;font-size:clamp(18px,2vw,22px);font-weight:300;margin-bottom:10px}
+.pdesc{font-size:clamp(12px,1.3vw,13px);line-height:1.8;color:var(--dim)}
+
+/* CONTACT */
+#contact{padding:var(--spy) 0 clamp(48px,6vw,80px)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,7vw,80px);align-items:start}
+@media(max-width:760px){.contact-grid{grid-template-columns:1fr;gap:48px}}
+.ctag{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,4.5vw,52px);font-weight:300;line-height:1.15;margin:20px 0 14px}
+.ctag em{font-style:italic;color:var(--amber)}
+.csub{font-size:14px;line-height:1.8;color:var(--dim);margin-bottom:40px}
+.cinfo{display:flex;flex-direction:column;gap:16px}
+.citem{display:flex;align-items:center;gap:14px;font-size:14px;color:var(--dim);transition:color .3s}
+.citem:hover{color:var(--white)}
+.cicon{width:38px;height:38px;border-radius:50%;flex-shrink:0;border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:15px;transition:border-color .3s,background .3s}
+.citem:hover .cicon{border-color:var(--amber);background:rgba(245,166,35,.08)}
+.cform{display:flex;flex-direction:column;gap:14px}
+.finput{width:100%;background:var(--anth);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius-sm);padding:16px 18px;color:var(--white);font-family:'DM Sans',sans-serif;font-size:14px;outline:none;transition:border-color .3s;-webkit-appearance:none}
+.finput::placeholder{color:rgba(245,244,240,.28)}
+.finput:focus{border-color:var(--amber)}
+textarea.finput{resize:none;height:110px}
+.fsubmit{display:flex;align-items:center;justify-content:center;gap:10px;background:linear-gradient(135deg,var(--amber),var(--orange));color:var(--black);border:none;border-radius:100px;padding:16px 36px;font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:500;cursor:pointer;transition:transform .3s var(--ease),box-shadow .3s;width:100%;margin-top:6px;-webkit-tap-highlight-color:transparent}
+.fsubmit:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(245,166,35,.28)}
+.fsubmit:active{transform:scale(.97)}
+
+/* FOOTER */
+footer{border-top:1px solid rgba(255,255,255,.06);padding:clamp(28px,4vw,48px) var(--px);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.flogo{display:flex;align-items:center;gap:10px}
+.flogo-txt{font-family:'Bebas Neue',sans-serif;letter-spacing:3px;font-size:15px;color:rgba(245,244,240,.4)}
+.fcopy{font-size:12px;color:rgba(245,244,240,.28)}
+.flinks{display:flex;gap:20px;flex-wrap:wrap}
+.flinks a{font-size:12px;color:rgba(245,244,240,.32);letter-spacing:1px;transition:color .3s}
+.flinks a:hover{color:var(--amber)}
+@media(max-width:600px){footer{flex-direction:column;text-align:center;align-items:center}.flinks{justify-content:center}}
+
+/* LIGHTBOX */
+#lb{position:fixed;inset:0;z-index:1500;background:rgba(5,5,5,.97);display:none;align-items:center;justify-content:center;padding:clamp(16px,4vw,48px);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+#lb.open{display:flex}
+.lb-close{position:absolute;top:20px;right:20px;width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.08);color:var(--white);font-size:18px;cursor:pointer;transition:background .3s;display:flex;align-items:center;justify-content:center;-webkit-tap-highlight-color:transparent}
+.lb-close:hover{background:rgba(255,255,255,.14)}
+.lb-content{max-width:860px;width:100%;text-align:center}
+.lb-thumb{width:100%;border-radius:var(--radius);margin-bottom:24px;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;font-size:64px;overflow:hidden}
+.lb-thumb img{width:100%;height:100%;object-fit:cover}
+.lb-title{font-family:'Cormorant Garamond',serif;font-size:clamp(24px,4vw,36px);font-weight:300;margin-bottom:10px}
+.lb-note{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(15px,2vw,18px);color:var(--dim);line-height:1.6}
+
+/* TOAST */
+#toast{position:fixed;bottom:clamp(72px,10vw,88px);right:clamp(16px,3vw,32px);z-index:3000;background:var(--amber);color:var(--black);padding:12px 22px;border-radius:100px;font-size:13px;font-weight:500;opacity:0;transition:opacity .3s;pointer-events:none;font-family:'DM Sans',sans-serif;max-width:calc(100vw - 48px)}
+</style>
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo">
+    <svg width="34" height="34" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <defs><linearGradient id="fg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#F5A623"/><stop offset="60%" stop-color="#E8611A"/><stop offset="100%" stop-color="#C0392B"/></linearGradient></defs>
+      <path d="M30 140 Q20 90 60 70 Q40 50 80 40 Q100 30 120 50 Q150 35 170 60 Q185 80 175 110 Q165 135 140 140 Q120 155 100 145 Q80 158 60 148 Z" fill="url(#fg)" opacity=".9"/>
+      <path d="M80 40 Q60 20 40 30 Q50 50 60 70" fill="url(#fg)"/>
+      <path d="M120 50 Q140 25 165 30 Q155 55 140 70" fill="#E8611A"/>
+      <circle cx="155" cy="85" r="6" fill="rgba(255,255,255,.7)"/>
+    </svg>
+    <div class="nav-logo-text">FOX <span>CREATIVE</span></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">Hakkımızda</a></li>
+    <li><a href="#works">Projeler</a></li>
+    <li><a href="#services">Hizmetler</a></li>
+    <li><a href="#process">Süreç</a></li>
+    <li><a href="#contact" class="nav-cta">İletişim</a></li>
+  </ul>
+  <button class="hamburger" id="burger" aria-label="Menü">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" class="mmlink">Hakkımızda</a>
+  <a href="#works" class="mmlink">Projeler</a>
+  <a href="#services" class="mmlink">Hizmetler</a>
+  <a href="#process" class="mmlink">Süreç</a>
+  <a href="#contact" class="mmlink mm-cta">İletişim</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg">
+    <div class="hero-film"></div>
+    <div class="hero-showreel">
+      <button class="play-btn" id="playBtn" aria-label="Showreel izle">
+        <svg width="18" height="18" viewBox="0 0 24 24"><polygon points="6,3 21,12 6,21" fill="#F5A623"/></svg>
+      </button>
+      <p class="play-label">Showreel 2025</p>
+    </div>
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Fox Creative — Dijital Ajans</p>
+    <h1 class="hero-title">Sahne<br><em>Tasarlıyoruz.</em></h1>
+    <p class="hero-sub" id="heroDesc">Biz sadece video çekmiyoruz. Işığı yönetiyor, anı kurguluyoruz ve markanın ruhunu sinematik bir dille anlatıyoruz.</p>
+    <div class="hero-actions">
+      <a href="#works" class="btn-primary">
+        Projeleri Keşfet
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <button class="btn-ghost" id="playBtn2">
+        Showreel
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16" fill="currentColor"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <p class="scroll-text">Scroll</p>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div id="strip">
+  <div class="marquee">
+    <div class="mi">Sinematografi <div class="md"></div></div>
+    <div class="mi">Marka Filmler <div class="md"></div></div>
+    <div class="mi">Reklam Prodüksiyonu <div class="md"></div></div>
+    <div class="mi">Fotoğraf <div class="md"></div></div>
+    <div class="mi">Post-Production <div class="md"></div></div>
+    <div class="mi">Renk Düzenleme <div class="md"></div></div>
+    <div class="mi">Motion Design <div class="md"></div></div>
+    <div class="mi">Sinematografi <div class="md"></div></div>
+    <div class="mi">Marka Filmler <div class="md"></div></div>
+    <div class="mi">Reklam Prodüksiyonu <div class="md"></div></div>
+    <div class="mi">Fotoğraf <div class="md"></div></div>
+    <div class="mi">Post-Production <div class="md"></div></div>
+    <div class="mi">Renk Düzenleme <div class="md"></div></div>
+    <div class="mi">Motion Design <div class="md"></div></div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="rev">
+        <div class="about-frame">
+          <div class="about-inner">Fox</div>
+          <div class="about-badge"><strong>60+</strong>Teslim Edilen Proje</div>
+        </div>
+      </div>
+      <div>
+        <p class="s-label rev">Hakkımızda</p>
+        <h2 class="s-head rev d1">Işığı <em>yönetiyoruz,</em><br>hikâyeyi kuruyoruz.</h2>
+        <p class="about-body rev d2">Fox Creative olarak inanıyoruz ki <strong>her markanın kendine özgü bir ritmi, tonu ve rengi</strong> vardır. Bizim işimiz o ritmi yakalamak ve onu görsel bir şiire dönüştürmek.</p>
+        <blockquote class="about-quote rev d3" id="siteSlogan">"Ekipman değil, vizyon."</blockquote>
+        <p class="about-body rev d3" style="margin-top:0;font-size:clamp(14px,1.5vw,16px)">En iyi kamera o anki gözlemdir. Prodüksiyon sürecinizi baştan sona sahipleniyor, her karede sizin sesinizdeki özgünlüğü koruyoruz.</p>
+        <div class="stats rev d4">
+          <div><div class="stat-num">60+</div><div class="stat-lbl">Proje</div></div>
+          <div><div class="stat-num">5+</div><div class="stat-lbl">Yıl</div></div>
+          <div><div class="stat-num">100%</div><div class="stat-lbl">Vizyon</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="ornament"><span></span><em>— Işığın peşinde, hikâyenin merkezinde —</em><span></span></div>
+
+<!-- WORKS -->
+<section id="works">
+  <div class="wrap">
+    <div class="works-header">
+      <div>
+        <p class="s-label rev">Seçkimiz</p>
+        <h2 class="s-head rev d1">İşlerimiz.</h2>
+      </div>
+      <p class="works-sub rev d2">Her kare bir karar. Her sahne bir sorumluluk. Burada gördükleriniz sadece projeler değil — imzalar.</p>
+    </div>
+    <div class="filter-bar rev d2">
+      <button class="fbtn on" data-f="all">Tümü</button>
+      <button class="fbtn" data-f="video">Video</button>
+      <button class="fbtn" data-f="photo">Fotoğraf</button>
+      <button class="fbtn" data-f="brand">Marka</button>
+      <button class="fbtn" data-f="ads">Reklam</button>
+    </div>
+    <div id="gallery-loading">Projeler yükleniyor…</div>
+    <div class="masonry" id="gallery" style="display:none"></div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="wrap">
+    <p class="s-label rev">Ne Yapıyoruz</p>
+    <h2 class="s-head rev d1">Uzmanlıklarımız.</h2>
+    <div class="svc-grid rev d2">
+      <div class="svc"><div class="svc-num">01</div><div class="svc-icon">🎬</div><h3 class="svc-name">Sinematik Prodüksiyon</h3><p class="svc-desc">Marka filmleri, reklam spotları ve kurumsal videolar. Her kare ayrı bir karar, her sahne ayrı bir sorumluluk.</p></div>
+      <div class="svc"><div class="svc-num">02</div><div class="svc-icon">📸</div><h3 class="svc-name">Fotoğraf & Görsel Kimlik</h3><p class="svc-desc">Ürün, portre, mimari ve atmosfer fotoğrafçılığı. Bir görselin sizi temsil etmesi için önce sizi anlamak gerekir.</p></div>
+      <div class="svc"><div class="svc-num">03</div><div class="svc-icon">🎨</div><h3 class="svc-name">Post-Production & Renk</h3><p class="svc-desc">Kurgu, renk düzenleme, ses tasarımı ve motion graphics. Ham görüntüyü filme dönüştüren süreç burada yaşanır.</p></div>
+      <div class="svc"><div class="svc-num">04</div><div class="svc-icon">✦</div><h3 class="svc-name">Yaratıcı Strateji</h3><p class="svc-desc">Konsept geliştirme, storyboard ve çekim planlaması. Vizyon önce, kamera sonra.</p></div>
+      <div class="svc"><div class="svc-num">05</div><div class="svc-icon">📱</div><h3 class="svc-name">Sosyal Medya İçeriği</h3><p class="svc-desc">Reels, TikTok, YouTube ve dijital platformlara özel içerik stratejisi ve prodüksiyonu. Kısa ama derin.</p></div>
+      <div class="svc"><div class="svc-num">06</div><div class="svc-icon">🏟️</div><h3 class="svc-name">Etkinlik Prodüksiyonu</h3><p class="svc-desc">Lansman, sahne ve kurumsal etkinliklerin belgesel diliyle anlatımı. Anı dondurmak değil, hissettirmek.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="wrap">
+    <p class="s-label rev">Nasıl Çalışıyoruz</p>
+    <h2 class="s-head rev d1">Sürecimiz.</h2>
+    <div class="proc-steps">
+      <div class="pstep rev d1"><div class="pnum">01</div><h3 class="ptitle">Keşif</h3><p class="pdesc">Projeyi, markayı ve hedefi derinlemesine anlamak için oturuyoruz. Önce dinliyoruz, sonra konuşuyoruz.</p></div>
+      <div class="pstep rev d2"><div class="pnum">02</div><h3 class="ptitle">Konsept</h3><p class="pdesc">Yaratıcı brief, storyboard ve mood board. Kamera açılmadan önce her sahne kâğıt üzerinde netleşir.</p></div>
+      <div class="pstep rev d3"><div class="pnum">03</div><h3 class="ptitle">Prodüksiyon</h3><p class="pdesc">Çekim günü hazırlık, ışık kurulumu ve operasyon. Her detay önceden planlandığı için set sakin çalışır.</p></div>
+      <div class="pstep rev d4"><div class="pnum">04</div><h3 class="ptitle">Teslim</h3><p class="pdesc">Post-production, revizyon turları ve nihai teslimat. Dosya değil, deneyim teslim ediyoruz.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="wrap">
+    <div class="contact-grid">
+      <div class="rev">
+        <p class="s-label">İletişim</p>
+        <h2 class="ctag">Bir projeniz mi var?<br><em>Konuşalım.</em></h2>
+        <p class="csub">Prodüksiyon süreci ister küçük ister büyük olsun — doğru vizyon her ölçekte çalışır.</p>
+        <div class="cinfo">
+          <a id="contactEmail" href="mailto:merhaba@foxcreative.co" class="citem"><div class="cicon">✉</div><span>merhaba@foxcreative.co</span></a>
+          <a id="contactPhone" href="tel:+905001234567" class="citem"><div class="cicon">📞</div><span>+90 500 123 45 67</span></a>
+          <div id="contactCity" class="citem"><div class="cicon">📍</div><span>İstanbul, Türkiye</span></div>
+        </div>
+      </div>
+      <div class="rev d2">
+        <div class="cform">
+          <input type="text" class="finput" placeholder="Adınız Soyadınız" autocomplete="name">
+          <input type="email" class="finput" placeholder="E-posta Adresiniz" autocomplete="email">
+          <input type="text" class="finput" placeholder="Proje Türü (Video, Fotoğraf…)">
+          <textarea class="finput" placeholder="Projenizi kısaca anlatın…"></textarea>
+          <button class="fsubmit" onclick="showToast('Mesajınız alındı! En kısa sürede dönüş yapacağız.')">
+            Mesaj Gönder
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="flogo">
+    <svg width="26" height="26" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <defs><linearGradient id="fg2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#F5A623"/><stop offset="100%" stop-color="#E8611A"/></linearGradient></defs>
+      <path d="M30 140 Q20 90 60 70 Q40 50 80 40 Q100 30 120 50 Q150 35 170 60 Q185 80 175 110 Q165 135 140 140 Q120 155 100 145 Q80 158 60 148 Z" fill="url(#fg2)" opacity=".75"/>
+      <circle cx="155" cy="85" r="6" fill="rgba(255,255,255,.55)"/>
+    </svg>
+    <span class="flogo-txt">FOX CREATIVE</span>
+  </div>
+  <p class="fcopy">© 2025 Fox Creative. Tüm hakları saklıdır.</p>
+  <div class="flinks">
+    <a href="#">Gizlilik</a>
+    <a id="footerInstagram" href="#">Instagram</a>
+    <a id="footerVimeo" href="#">Vimeo</a>
+    <a href="#">Behance</a>
+  </div>
+</footer>
+
+<!-- LIGHTBOX -->
+<div id="lb">
+  <button class="lb-close" onclick="closeLb()">✕</button>
+  <div class="lb-content">
+    <div class="lb-thumb" id="lbThumb"></div>
+    <h3 class="lb-title" id="lbTitle"></h3>
+    <p class="lb-note" id="lbNote"></p>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+/* ── CATEGORY LABELS ── */
+const catMap={video:'Video',photo:'Fotoğraf',brand:'Marka Filmi',ads:'Reklam'};
+const catColors={
+  video:'linear-gradient(160deg,#1a0a00,#2d1500,#0d0d0d)',
+  photo:'linear-gradient(135deg,#1a1500,#2a1f00,#0a0800)',
+  brand:'linear-gradient(160deg,#0a0f1a,#0f1a2a,#05080d)',
+  ads:'linear-gradient(135deg,#0d0d0d,#1a1a1a,#050505)'
+};
+const catEmoji={video:'🎬',photo:'📸',brand:'🏢',ads:'🎯'};
+
+/* ── LOAD SETTINGS ── */
+fetch('/data/settings.json').then(r=>r.json()).then(s=>{
+  if(s.heroDesc)document.getElementById('heroDesc').textContent=s.heroDesc;
+  if(s.slogan)document.getElementById('siteSlogan').textContent='"'+s.slogan+'"';
+  if(s.email){const el=document.getElementById('contactEmail');el.href='mailto:'+s.email;el.querySelector('span').textContent=s.email}
+  if(s.phone){const el=document.getElementById('contactPhone');el.href='tel:'+s.phone.replace(/\s/g,'');el.querySelector('span').textContent=s.phone}
+  if(s.city)document.getElementById('contactCity').querySelector('span').textContent=s.city;
+  if(s.instagram)document.getElementById('footerInstagram').href=s.instagram;
+  if(s.vimeo)document.getElementById('footerVimeo').href=s.vimeo;
+  if(s.showreelUrl){
+    ['playBtn','playBtn2'].forEach(id=>{
+      const el=document.getElementById(id);
+      if(el)el.addEventListener('click',()=>window.open(s.showreelUrl,'_blank'));
+    });
+  } else {
+    ['playBtn','playBtn2'].forEach(id=>{
+      const el=document.getElementById(id);
+      if(el)el.addEventListener('click',()=>showToast('Showreel yakında yükleniyor!'));
+    });
+  }
+}).catch(()=>{
+  ['playBtn','playBtn2'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el)el.addEventListener('click',()=>showToast('Showreel yakında yükleniyor!'));
+  });
+});
+
+/* ── LOAD GALLERY ── */
+fetch('/data/projects.json').then(r=>r.json()).then(data=>{
+  const items=data.items||[];
+  const gallery=document.getElementById('gallery');
+  const loading=document.getElementById('gallery-loading');
+  if(!items.length){loading.textContent='Henüz proje eklenmedi.';return}
+  gallery.innerHTML=items.map(p=>`
+    <div class="mitem" data-c="${p.category||'video'}" data-t="${p.title||''}" data-n="${p.note||''}" data-img="${p.image||''}" onclick="openLb(this)">
+      ${p.image
+        ?`<img class="mthumb" src="${p.image}" alt="${p.title}" style="height:${p.height||280}px">`
+        :`<div class="mthumb-placeholder" style="height:${p.height||280}px;background:${catColors[p.category]||catColors.video}">${catEmoji[p.category]||'🎬'}</div>`
+      }
+      <div class="mov">
+        <span class="mcat">${catMap[p.category]||p.category}</span>
+        <h3 class="mtitle">${p.title}</h3>
+        <p class="mnote">"${p.note}"</p>
+      </div>
+      <div class="mbadge"><div class="bdot"></div>${catMap[p.category]||p.category}</div>
+    </div>
+  `).join('');
+  loading.style.display='none';
+  gallery.style.display='block';
+  /* re-observe new elements */
+  gallery.querySelectorAll('.mitem').forEach(el=>{
+    el.style.opacity='0';el.style.transform='translateY(20px)';
+    setTimeout(()=>{el.style.transition='opacity .6s,transform .6s';el.style.opacity='1';el.style.transform='translateY(0)'},100);
+  });
+}).catch(()=>{
+  document.getElementById('gallery-loading').textContent='Projeler yüklenemedi.';
+});
+
+/* ── CURSOR ── */
+const cur=document.getElementById('cursor'),ring=document.getElementById('cursor-ring');
+if(cur&&ring){
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});
+  document.querySelectorAll('a,button').forEach(el=>{
+    el.addEventListener('mouseenter',()=>cur.classList.add('hov'));
+    el.addEventListener('mouseleave',()=>cur.classList.remove('hov'));
+  });
+  function raf(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(raf)}raf();
+}
+
+/* ── NAV ── */
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>60),{passive:true});
+
+/* ── HAMBURGER ── */
+const burger=document.getElementById('burger'),mm=document.getElementById('mobileMenu');
+burger.addEventListener('click',()=>{burger.classList.toggle('open');mm.classList.toggle('open');document.body.style.overflow=mm.classList.contains('open')?'hidden':''});
+document.querySelectorAll('.mmlink').forEach(a=>a.addEventListener('click',()=>{burger.classList.remove('open');mm.classList.remove('open');document.body.style.overflow=''}));
+
+/* ── SCROLL REVEAL ── */
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('vis')}),{threshold:.1});
+document.querySelectorAll('.rev').forEach(el=>obs.observe(el));
+
+/* ── FILTER ── */
+document.querySelectorAll('.fbtn').forEach(btn=>{
+  btn.addEventListener('click',function(){
+    document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('on'));this.classList.add('on');
+    const f=this.dataset.f;
+    document.querySelectorAll('.mitem').forEach(item=>{
+      const m=f==='all'||item.dataset.c===f;
+      item.style.opacity=m?'1':'0.18';item.style.transform=m?'':'scale(.97)';item.style.transition='opacity .4s,transform .4s';
+    });
+  });
+});
+
+/* ── LIGHTBOX ── */
+function openLb(el){
+  const img=el.dataset.img;
+  const thumb=document.getElementById('lbThumb');
+  if(img){thumb.innerHTML=`<img src="${img}" alt="${el.dataset.t}" style="width:100%;height:100%;object-fit:cover">`;thumb.style.background=''}
+  else{thumb.innerHTML=el.querySelector('.mthumb-placeholder')?el.querySelector('.mthumb-placeholder').innerHTML:'🎬';thumb.style.background=el.querySelector('.mthumb-placeholder')?el.querySelector('.mthumb-placeholder').style.background:'#1a1a1a'}
+  document.getElementById('lbTitle').textContent=el.dataset.t||'';
+  document.getElementById('lbNote').textContent=el.dataset.n||'';
+  document.getElementById('lb').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeLb(){document.getElementById('lb').classList.remove('open');document.body.style.overflow=''}
+document.getElementById('lb').addEventListener('click',function(e){if(e.target===this)closeLb()});
+let ts=0;
+document.getElementById('lb').addEventListener('touchstart',e=>{ts=e.touches[0].clientY},{passive:true});
+document.getElementById('lb').addEventListener('touchend',e=>{if(e.changedTouches[0].clientY-ts>60)closeLb()},{passive:true});
+
+/* ── SMOOTH SCROLL ── */
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{const t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'})}});
+});
+
+/* ── TOAST ── */
+let toastTimer;
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.style.opacity='1';clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.style.opacity='0',2800)}
+
+/* ── NETLIFY IDENTITY ── */
+if(window.netlifyIdentity){
+  window.netlifyIdentity.on('init',user=>{if(!user){window.netlifyIdentity.on('login',()=>{document.location.href='/admin/'})}});
+}
+</script>
+</body>
+</html>
