@@ -24,6 +24,11 @@
         }
       ],
       "cover": "/images/uploads/ch4ql-logo.jpg"
+    },
+    {
+      "name": "Crowne Plaza",
+      "type": "video",
+      "cover": "https://res.cloudinary.com/dccxfj7yq/video/upload/v1776981762/crowne_plaza_t887pl.mov"
     }
   ]
 }
