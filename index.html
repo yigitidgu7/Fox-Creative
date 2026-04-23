@@ -136,48 +136,68 @@ nav.scrolled{background:rgba(10,10,10,.93);backdrop-filter:blur(20px);-webkit-ba
 .reel-track{display:flex;gap:14px;animation:reel 35s linear infinite;width:max-content}
 .reel-track:hover{animation-play-state:paused}
 @keyframes reel{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-.reel-card{width:clamp(180px,20vw,260px);height:clamp(130px,14vw,180px);border-radius:10px;overflow:hidden;position:relative;flex-shrink:0;background:var(--anth);cursor:pointer;transition:transform .3s var(--ease);-webkit-tap-highlight-color:transparent}
+.reel-card{width:clamp(180px,20vw,260px);height:clamp(130px,14vw,180px);border-radius:10px;overflow:hidden;position:relative;flex-shrink:0;background:var(--anth);cursor:pointer;transition:transform .3s var(--ease)}
 .reel-card:hover{transform:scale(1.04)}.reel-card:active{transform:scale(.97)}
 .reel-media,.reel-video{width:100%;height:100%;object-fit:cover;display:block}
-.reel-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:32px}
-.reel-info{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,10,10,.88) 0%,transparent 55%);display:flex;flex-direction:column;justify-content:flex-end;padding:12px;opacity:0;transition:opacity .3s}
+.reel-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:28px}
+.reel-info{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,10,10,.88) 0%,transparent 55%);display:flex;flex-direction:column;justify-content:flex-end;padding:10px;opacity:0;transition:opacity .3s}
 .reel-card:hover .reel-info{opacity:1}
 @media(hover:none){.reel-info{opacity:1}}
-.reel-title{font-family:'Cormorant Garamond',serif;font-size:13px;font-weight:300;color:var(--white);margin-bottom:2px}
-.reel-cat{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--amber)}
-.reel-play{position:absolute;top:10px;right:10px;width:26px;height:26px;border-radius:50%;background:rgba(245,166,35,.85);display:flex;align-items:center;justify-content:center}
-#fmodal{position:fixed;inset:0;z-index:1500;display:none;flex-direction:column;background:rgba(5,5,5,.98);backdrop-filter:blur(16px)}
-#fmodal.open{display:flex}
-.fmodal-head{display:flex;align-items:center;justify-content:space-between;padding:clamp(16px,2vw,28px) var(--px);border-bottom:1px solid rgba(255,255,255,.07);flex-shrink:0}
-.fmodal-title{font-family:'Cormorant Garamond',serif;font-size:clamp(24px,3vw,40px);font-weight:300;display:flex;align-items:center;gap:14px}
-.fmodal-title em{font-style:italic;color:var(--amber)}
-.fmodal-count{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);font-family:'DM Sans',sans-serif;font-style:normal}
-.fmodal-close{width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.12);background:none;color:var(--white);font-size:18px;display:flex;align-items:center;justify-content:center;transition:all .3s;-webkit-tap-highlight-color:transparent}
-.fmodal-close:hover{background:rgba(255,255,255,.1)}
-.fmodal-body{flex:1;overflow-y:auto;padding:clamp(20px,3vw,40px) var(--px)}
-.fmodal-grid{columns:4;column-gap:14px}
-@media(max-width:1100px){.fmodal-grid{columns:3}}
-@media(max-width:700px){.fmodal-grid{columns:2}}
-@media(max-width:400px){.fmodal-grid{columns:1}}
-.fmodal-item{break-inside:avoid;margin-bottom:14px;border-radius:var(--radius-sm);overflow:hidden;position:relative;cursor:pointer;background:var(--anth);transition:transform .4s var(--ease)}
-.fmodal-item:hover{transform:scale(.97)}
-.fmodal-thumb{width:100%;display:block;object-fit:cover}
-.fmodal-ph{width:100%;display:flex;align-items:center;justify-content:center;font-size:36px}
-.fmodal-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,10,10,.92) 0%,transparent 60%);opacity:0;transition:opacity .3s;display:flex;flex-direction:column;justify-content:flex-end;padding:14px}
-.fmodal-item:hover .fmodal-ov{opacity:1}
-@media(hover:none){.fmodal-ov{opacity:1}}
-.fmodal-t{font-family:'Cormorant Garamond',serif;font-size:14px;font-weight:300;color:var(--white);margin-bottom:4px}
-.fmodal-n{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:11px;color:rgba(245,244,240,.6);line-height:1.5}
-.fmodal-empty{text-align:center;padding:80px 20px;font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;color:var(--dim);font-style:italic}
-#lb{position:fixed;inset:0;z-index:2000;background:rgba(5,5,5,.97);display:none;align-items:center;justify-content:center;padding:clamp(16px,4vw,48px);backdrop-filter:blur(10px)}
+.reel-title{font-family:'Cormorant Garamond',serif;font-size:12px;font-weight:300;color:var(--white)}
+.reel-cat{font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--amber)}
+.modal{position:fixed;inset:0;z-index:1500;display:none;flex-direction:column;background:rgba(5,5,5,.98);backdrop-filter:blur(16px)}
+.modal.open{display:flex}
+.modal-head{display:flex;align-items:center;gap:16px;padding:clamp(16px,2vw,24px) var(--px);border-bottom:1px solid rgba(255,255,255,.07);flex-shrink:0}
+.modal-back{width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.12);background:none;color:var(--white);font-size:16px;display:flex;align-items:center;justify-content:center;transition:all .3s;flex-shrink:0;cursor:pointer}
+.modal-back:hover{background:rgba(255,255,255,.08)}
+.modal-head-title{font-family:'Cormorant Garamond',serif;font-size:clamp(22px,3vw,36px);font-weight:300;flex:1}
+.modal-head-title em{font-style:italic;color:var(--amber)}
+.modal-head-count{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--dim)}
+.modal-body{flex:1;overflow-y:auto;padding:clamp(20px,3vw,40px) var(--px)}
+.brand-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+@media(max-width:500px){.brand-grid{grid-template-columns:1fr 1fr;gap:10px}}
+.brand-card{position:relative;border-radius:var(--radius);overflow:hidden;aspect-ratio:4/3;cursor:pointer;background:var(--anth);transition:transform .4s var(--ease)}
+.brand-card:hover{transform:scale(.97)}.brand-card:active{transform:scale(.94)}
+.brand-cover{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform .6s var(--ease)}
+.brand-card:hover .brand-cover{transform:scale(1.05)}
+.brand-cover-ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:40px;background:linear-gradient(135deg,var(--anth),var(--anth2))}
+.brand-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,10,10,.9) 0%,rgba(10,10,10,.2) 60%,transparent 100%)}
+.brand-info{position:absolute;bottom:0;left:0;right:0;padding:16px 18px}
+.brand-name{font-family:'Bebas Neue',sans-serif;font-size:clamp(18px,2.5vw,24px);letter-spacing:2px;color:var(--white);margin-bottom:4px}
+.brand-meta{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);display:flex;align-items:center;gap:8px}
+.brand-dot{width:4px;height:4px;border-radius:50%;background:var(--amber)}
+.gallery-modal{position:fixed;inset:0;z-index:1600;display:none;flex-direction:column;background:rgba(3,3,3,.99);backdrop-filter:blur(20px)}
+.gallery-modal.open{display:flex}
+.gallery-head{display:flex;align-items:center;gap:16px;padding:clamp(14px,2vw,22px) var(--px);border-bottom:1px solid rgba(255,255,255,.06);flex-shrink:0}
+.gallery-brand-name{font-family:'Bebas Neue',sans-serif;font-size:clamp(20px,2.5vw,30px);letter-spacing:3px;color:var(--white);flex:1}
+.gallery-count{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim)}
+.gallery-body{flex:1;overflow-y:auto;padding:clamp(16px,2.5vw,32px) var(--px)}
+.gallery-masonry{columns:4;column-gap:10px}
+@media(max-width:1100px){.gallery-masonry{columns:3}}
+@media(max-width:700px){.gallery-masonry{columns:2}}
+@media(max-width:380px){.gallery-masonry{columns:1}}
+.gallery-item{break-inside:avoid;margin-bottom:10px;border-radius:8px;overflow:hidden;position:relative;cursor:pointer;background:var(--anth);transition:transform .3s var(--ease)}
+.gallery-item:hover{transform:scale(.97)}.gallery-item:active{transform:scale(.94)}
+.gallery-img{width:100%;display:block;object-fit:cover}
+.gallery-video{width:100%;display:block;object-fit:cover;max-height:300px}
+.gallery-ph{width:100%;height:200px;display:flex;align-items:center;justify-content:center;font-size:32px;background:var(--anth2)}
+.gallery-item-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,10,10,.85) 0%,transparent 50%);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:12px}
+.gallery-item:hover .gallery-item-ov{opacity:1}
+@media(hover:none){.gallery-item-ov{opacity:1}}
+.gallery-caption{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:12px;color:rgba(245,244,240,.7);line-height:1.4}
+.gallery-empty{text-align:center;padding:80px 20px;font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;color:var(--dim);font-style:italic}
+#lb{position:fixed;inset:0;z-index:2000;background:rgba(2,2,2,.98);display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(12px)}
 #lb.open{display:flex}
-.lb-close{position:absolute;top:20px;right:20px;width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.08);color:var(--white);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .3s}
+.lb-close{position:absolute;top:20px;right:20px;width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.08);color:var(--white);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .3s;z-index:1}
 .lb-close:hover{background:rgba(255,255,255,.14)}
-.lb-content{max-width:900px;width:100%;text-align:center}
-.lb-thumb{width:100%;border-radius:var(--radius);margin-bottom:24px;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;font-size:64px;overflow:hidden;background:#1a1a1a}
-.lb-thumb img,.lb-thumb video{width:100%;height:100%;object-fit:cover;border-radius:var(--radius)}
-.lb-title{font-family:'Cormorant Garamond',serif;font-size:clamp(22px,4vw,36px);font-weight:300;margin-bottom:10px}
-.lb-note{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(14px,2vw,18px);color:var(--dim);line-height:1.6}
+.lb-content{max-width:1000px;width:100%;text-align:center}
+.lb-media{width:100%;border-radius:var(--radius);overflow:hidden;max-height:75vh;display:flex;align-items:center;justify-content:center;background:#111;margin-bottom:16px}
+.lb-media img,.lb-media video{max-width:100%;max-height:75vh;object-fit:contain;border-radius:var(--radius)}
+.lb-caption{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16px;color:var(--dim)}
+.lb-nav{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);color:var(--white);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .3s}
+.lb-nav:hover{background:rgba(255,255,255,.16)}
+.lb-prev{left:16px}.lb-next{right:16px}
+@media(max-width:600px){.lb-prev{left:6px}.lb-next{right:6px}}
 #services{padding:var(--spy) 0;background:var(--anth)}
 .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:clamp(40px,5vw,64px);border-radius:var(--radius);overflow:hidden}
 @media(max-width:900px){.svc-grid{grid-template-columns:repeat(2,1fr)}}
@@ -233,7 +253,7 @@ footer{border-top:1px solid rgba(255,255,255,.06);padding:clamp(28px,4vw,48px) v
 <nav id="nav">
   <a href="#" class="nav-logo" id="navLogo">
     <svg id="logoSvg" width="34" height="34" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="fg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#F5A623"/><stop offset="60%" stop-color="#E8611A"/><stop offset="100%" stop-color="#C0392B"/></linearGradient></defs><path d="M30 140 Q20 90 60 70 Q40 50 80 40 Q100 30 120 50 Q150 35 170 60 Q185 80 175 110 Q165 135 140 140 Q120 155 100 145 Q80 158 60 148 Z" fill="url(#fg)" opacity=".9"/><path d="M80 40 Q60 20 40 30 Q50 50 60 70" fill="url(#fg)"/><path d="M120 50 Q140 25 165 30 Q155 55 140 70" fill="#E8611A"/><circle cx="155" cy="85" r="6" fill="rgba(255,255,255,.7)"/></svg>
-    <img id="logoImg" style="display:none;height:36px;max-width:160px;object-fit:contain" alt="Fox Creative Logo">
+    <img id="logoImg" style="display:none;height:36px;max-width:160px;object-fit:contain" alt="Fox Creative">
     <div class="nav-logo-text">FOX <span>CREATIVE</span></div>
   </a>
   <ul class="nav-links">
@@ -269,7 +289,7 @@ footer{border-top:1px solid rgba(255,255,255,.06);padding:clamp(28px,4vw,48px) v
   <div>
     <p class="s-label rev">Hakkımızda</p>
     <h2 class="s-head rev d1">Işığı <em>yönetiyoruz,</em><br>hikâyeyi kuruyoruz.</h2>
-    <p class="about-body rev d2">Fox Creative olarak inanıyoruz ki <strong>her markanın kendine özgü bir ritmi, tonu ve rengi</strong> vardır. Bizim işimiz o ritmi yakalamak ve onu görsel bir şiire dönüştürmek.</p>
+    <p class="about-body rev d2">Fox Creative olarak inanıyoruz ki <strong>her markanın kendine özgü bir ritmi, tonu ve rengi</strong> vardır.</p>
     <blockquote class="about-quote rev d3" id="siteSlogan">"Ekipman değil, vizyon."</blockquote>
     <p class="about-body rev d3" style="margin-top:0;font-size:clamp(14px,1.5vw,16px)">En iyi kamera o anki gözlemdir. Prodüksiyon sürecinizi baştan sona sahipleniyor, her karede sizin sesinizdeki özgünlüğü koruyoruz.</p>
     <div class="stats rev d4"><div><div class="stat-num">60+</div><div class="stat-lbl">Proje</div></div><div><div class="stat-num">5+</div><div class="stat-lbl">Yıl</div></div><div><div class="stat-num">100%</div><div class="stat-lbl">Vizyon</div></div></div>
@@ -279,10 +299,10 @@ footer{border-top:1px solid rgba(255,255,255,.06);padding:clamp(28px,4vw,48px) v
 <section id="works"><div class="wrap">
   <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px">
     <div><p class="s-label rev">Seçkimiz</p><h2 class="s-head rev d1">İşlerimiz.</h2></div>
-    <p class="rev d2" style="font-size:14px;line-height:1.8;color:var(--dim);max-width:340px">İki arşivimizi keşfedin. Her kare bir karar, her sahne bir imza.</p>
+    <p class="rev d2" style="font-size:14px;line-height:1.8;color:var(--dim);max-width:340px">İki arşivimizi keşfedin. Klasöre tıkla, galeriyi gez.</p>
   </div>
   <div class="folder-grid rev d2">
-    <div class="folder-card" onclick="openFolder('photo')">
+    <div class="folder-card" onclick="openTypeModal('photo')">
       <div class="folder-bg folder-photo-bg"></div><div class="fg-photo"></div><div class="folder-overlay"></div>
       <div class="folder-content">
         <div class="folder-icon">📷</div>
@@ -292,7 +312,7 @@ footer{border-top:1px solid rgba(255,255,255,.06);padding:clamp(28px,4vw,48px) v
       </div>
       <div class="folder-badge">Fotoğraf Arşivi</div>
     </div>
-    <div class="folder-card" onclick="openFolder('video')">
+    <div class="folder-card" onclick="openTypeModal('video')">
       <div class="folder-bg folder-video-bg"></div><div class="fg-video"></div><div class="folder-overlay"></div>
       <div class="folder-content">
         <div class="folder-icon">🎬</div>
@@ -305,42 +325,54 @@ footer{border-top:1px solid rgba(255,255,255,.06);padding:clamp(28px,4vw,48px) v
   </div>
   <div class="reel-wrap rev d3"><div class="reel-track" id="reelTrack"></div></div>
 </div></section>
-<div id="fmodal">
-  <div class="fmodal-head">
-    <h2 class="fmodal-title"><em id="fmodalTitleEm">Fotoğraflar</em> <span class="fmodal-count" id="fmodalCount"></span></h2>
-    <button class="fmodal-close" onclick="closeFolder()">✕</button>
+<div class="modal" id="typeModal">
+  <div class="modal-head">
+    <button class="modal-back" onclick="closeTypeModal()">←</button>
+    <div style="flex:1"><div class="modal-head-title" id="typeModalTitle">Fotoğraflar</div><div class="modal-head-count" id="typeModalCount"></div></div>
+    <button class="modal-back" onclick="closeTypeModal()">✕</button>
   </div>
-  <div class="fmodal-body"><div class="fmodal-grid" id="fmodalGrid"></div></div>
+  <div class="modal-body"><div class="brand-grid" id="brandGrid"></div></div>
+</div>
+<div class="gallery-modal" id="galleryModal">
+  <div class="gallery-head">
+    <button class="modal-back" onclick="closeGalleryModal()">←</button>
+    <div class="gallery-brand-name" id="galleryBrandName"></div>
+    <div class="gallery-count" id="galleryCount"></div>
+    <button class="modal-back" onclick="closeGalleryModal()" style="margin-left:8px">✕</button>
+  </div>
+  <div class="gallery-body"><div class="gallery-masonry" id="galleryGrid"></div></div>
 </div>
 <div id="lb">
   <button class="lb-close" onclick="closeLb()">✕</button>
-  <div class="lb-content"><div class="lb-thumb" id="lbThumb"></div><h3 class="lb-title" id="lbTitle"></h3><p class="lb-note" id="lbNote"></p></div>
+  <button class="lb-nav lb-prev" onclick="lbNav(-1)">‹</button>
+  <button class="lb-nav lb-next" onclick="lbNav(1)">›</button>
+  <div class="lb-content"><div class="lb-media" id="lbMedia"></div><div class="lb-caption" id="lbCaption"></div></div>
 </div>
 <section id="services"><div class="wrap">
   <p class="s-label rev">Ne Yapıyoruz</p><h2 class="s-head rev d1">Uzmanlıklarımız.</h2>
   <div class="svc-grid rev d2">
-    <div class="svc"><div class="svc-num">01</div><div class="svc-icon">🎬</div><h3 class="svc-name">Sinematik Prodüksiyon</h3><p class="svc-desc">Marka filmleri, reklam spotları ve kurumsal videolar. Her kare ayrı bir karar, her sahne ayrı bir sorumluluk.</p></div>
-    <div class="svc"><div class="svc-num">02</div><div class="svc-icon">📸</div><h3 class="svc-name">Fotoğraf & Görsel Kimlik</h3><p class="svc-desc">Ürün, portre, mimari ve atmosfer fotoğrafçılığı. Bir görselin sizi temsil etmesi için önce sizi anlamak gerekir.</p></div>
-    <div class="svc"><div class="svc-num">03</div><div class="svc-icon">🎨</div><h3 class="svc-name">Post-Production & Renk</h3><p class="svc-desc">Kurgu, renk düzenleme, ses tasarımı ve motion graphics. Ham görüntüyü filme dönüştüren süreç burada yaşanır.</p></div>
-    <div class="svc"><div class="svc-num">04</div><div class="svc-icon">✦</div><h3 class="svc-name">Yaratıcı Strateji</h3><p class="svc-desc">Konsept geliştirme, storyboard ve çekim planlaması. Vizyon önce, kamera sonra.</p></div>
-    <div class="svc"><div class="svc-num">05</div><div class="svc-icon">📱</div><h3 class="svc-name">Sosyal Medya İçeriği</h3><p class="svc-desc">Reels, TikTok, YouTube ve dijital platformlara özel içerik stratejisi. Kısa ama derin.</p></div>
-    <div class="svc"><div class="svc-num">06</div><div class="svc-icon">🏟️</div><h3 class="svc-name">Etkinlik Prodüksiyonu</h3><p class="svc-desc">Lansman, sahne ve kurumsal etkinliklerin belgesel diliyle anlatımı. Anı dondurmak değil, hissettirmek.</p></div>
+    <div class="svc"><div class="svc-num">01</div><div class="svc-icon">🎬</div><h3 class="svc-name">Sinematik Prodüksiyon</h3><p class="svc-desc">Marka filmleri, reklam spotları ve kurumsal videolar. Her kare ayrı bir karar.</p></div>
+    <div class="svc"><div class="svc-num">02</div><div class="svc-icon">📸</div><h3 class="svc-name">Fotoğraf & Görsel Kimlik</h3><p class="svc-desc">Ürün, portre, mimari ve atmosfer fotoğrafçılığı.</p></div>
+    <div class="svc"><div class="svc-num">03</div><div class="svc-icon">🎨</div><h3 class="svc-name">Post-Production & Renk</h3><p class="svc-desc">Kurgu, renk düzenleme, ses tasarımı ve motion graphics.</p></div>
+    <div class="svc"><div class="svc-num">04</div><div class="svc-icon">✦</div><h3 class="svc-name">Yaratıcı Strateji</h3><p class="svc-desc">Konsept geliştirme, storyboard ve çekim planlaması.</p></div>
+    <div class="svc"><div class="svc-num">05</div><div class="svc-icon">📱</div><h3 class="svc-name">Sosyal Medya İçeriği</h3><p class="svc-desc">Reels, TikTok, YouTube ve dijital platformlara özel içerik.</p></div>
+    <div class="svc"><div class="svc-num">06</div><div class="svc-icon">🏟️</div><h3 class="svc-name">Etkinlik Prodüksiyonu</h3><p class="svc-desc">Lansman ve kurumsal etkinliklerin belgesel diliyle anlatımı.</p></div>
   </div>
 </div></section>
 <section id="process"><div class="wrap">
   <p class="s-label rev">Nasıl Çalışıyoruz</p><h2 class="s-head rev d1">Sürecimiz.</h2>
   <div class="proc-steps">
-    <div class="pstep rev d1"><div class="pnum">01</div><h3 class="ptitle">Keşif</h3><p class="pdesc">Projeyi, markayı ve hedefi derinlemesine anlamak için oturuyoruz. Önce dinliyoruz, sonra konuşuyoruz.</p></div>
-    <div class="pstep rev d2"><div class="pnum">02</div><h3 class="ptitle">Konsept</h3><p class="pdesc">Yaratıcı brief, storyboard ve mood board. Kamera açılmadan önce her sahne kâğıt üzerinde netleşir.</p></div>
-    <div class="pstep rev d3"><div class="pnum">03</div><h3 class="ptitle">Prodüksiyon</h3><p class="pdesc">Çekim günü hazırlık, ışık kurulumu ve operasyon. Her detay önceden planlandığı için set sakin çalışır.</p></div>
-    <div class="pstep rev d4"><div class="pnum">04</div><h3 class="ptitle">Teslim</h3><p class="pdesc">Post-production, revizyon turları ve nihai teslimat. Dosya değil, deneyim teslim ediyoruz.</p></div>
+    <div class="pstep rev d1"><div class="pnum">01</div><h3 class="ptitle">Keşif</h3><p class="pdesc">Önce dinliyoruz, sonra konuşuyoruz.</p></div>
+    <div class="pstep rev d2"><div class="pnum">02</div><h3 class="ptitle">Konsept</h3><p class="pdesc">Her sahne kamera açılmadan netleşir.</p></div>
+    <div class="pstep rev d3"><div class="pnum">03</div><h3 class="ptitle">Prodüksiyon</h3><p class="pdesc">Her detay planlandığı için set sakin çalışır.</p></div>
+    <div class="pstep rev d4"><div class="pnum">04</div><h3 class="ptitle">Teslim</h3><p class="pdesc">Dosya değil, deneyim teslim ediyoruz.</p></div>
   </div>
 </div></section>
 <section id="contact"><div class="wrap"><div class="contact-grid">
   <div class="rev">
     <p class="s-label">İletişim</p>
     <h2 class="ctag">Bir projeniz mi var?<br><em>Konuşalım.</em></h2>
-    <p class="csub">Prodüksiyon süreci ister küçük ister büyük olsun — doğru vizyon her ölçekte çalışır.</p>
+    <p class="csub">Doğru vizyon her ölçekte çalışır.</p>
     <div class="cinfo">
       <a id="contactEmail" href="mailto:merhaba@foxcreative.co" class="citem"><div class="cicon">✉</div><span>merhaba@foxcreative.co</span></a>
       <a id="contactPhone" href="tel:+905001234567" class="citem"><div class="cicon">📞</div><span>+90 500 123 45 67</span></a>
@@ -348,11 +380,11 @@ footer{border-top:1px solid rgba(255,255,255,.06);padding:clamp(28px,4vw,48px) v
     </div>
   </div>
   <div class="rev d2"><div class="cform">
-    <input type="text" class="finput" placeholder="Adınız Soyadınız" autocomplete="name">
-    <input type="email" class="finput" placeholder="E-posta Adresiniz" autocomplete="email">
-    <input type="text" class="finput" placeholder="Proje Türü (Video, Fotoğraf…)">
+    <input type="text" class="finput" placeholder="Adınız Soyadınız">
+    <input type="email" class="finput" placeholder="E-posta Adresiniz">
+    <input type="text" class="finput" placeholder="Proje Türü">
     <textarea class="finput" placeholder="Projenizi kısaca anlatın…"></textarea>
-    <button class="fsubmit" onclick="showToast('Mesajınız alındı! En kısa sürede dönüş yapacağız.')">Mesaj Gönder <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+    <button class="fsubmit" onclick="showToast('Mesajınız alındı!')">Mesaj Gönder <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
   </div></div>
 </div></div></section>
 <footer>
@@ -362,9 +394,8 @@ footer{border-top:1px solid rgba(255,255,255,.06);padding:clamp(28px,4vw,48px) v
 </footer>
 <div id="toast"></div>
 <script>
-var allP=[],catBg={video:'linear-gradient(160deg,#1a0a00,#2d1500,#0d0d0d)',photo:'linear-gradient(135deg,#1a1500,#2a1f00,#0a0800)',brand:'linear-gradient(160deg,#0a0f1a,#0f1a2a,#05080d)',ads:'linear-gradient(135deg,#0d0d0d,#1a1a1a,#050505)'},catEm={video:'🎬',photo:'📸',brand:'🏢',ads:'🎯'};
-function isVid(p){return p.category==='video'||p.category==='brand'||(p.image&&/\.(mp4|mov|webm)$/i.test(p.image))}
-function isPhoto(p){return !isVid(p)}
+var allBrands=[],lbItems=[],lbIdx=0,currentBrandItems=[];
+function isVidUrl(u){return u&&/\.(mp4|mov|webm)$/i.test(u)}
 fetch('/data/settings.json').then(function(r){return r.json()}).then(function(s){
   if(s.heroDesc)document.getElementById('heroDesc').textContent=s.heroDesc;
   if(s.slogan)document.getElementById('siteSlogan').textContent='"'+s.slogan+'"';
@@ -374,68 +405,69 @@ fetch('/data/settings.json').then(function(r){return r.json()}).then(function(s)
   if(s.instagram)document.getElementById('footerInstagram').href=s.instagram;
   if(s.vimeo)document.getElementById('footerVimeo').href=s.vimeo;
   if(s.logoImage){document.getElementById('logoSvg').style.display='none';var li=document.getElementById('logoImg');li.src=s.logoImage;li.style.display='block';}
-  var sh=s.showreelUrl?function(){window.open(s.showreelUrl,'_blank')}:function(){showToast('Showreel yakında yükleniyor!')};
+  var sh=s.showreelUrl?function(){window.open(s.showreelUrl,'_blank')}:function(){showToast('Showreel yakında!')};
   ['playBtn','playBtn2'].forEach(function(id){var el=document.getElementById(id);if(el)el.addEventListener('click',sh)});
-}).catch(function(){
-  ['playBtn','playBtn2'].forEach(function(id){var el=document.getElementById(id);if(el)el.addEventListener('click',function(){showToast('Showreel yakında yükleniyor!')})});
-});
-fetch('/data/projects.json').then(function(r){return r.json()}).then(function(data){
-  allP=data.items||[];
-  document.getElementById('photoCount').textContent=allP.filter(isPhoto).length+' içerik';
-  document.getElementById('videoCount').textContent=allP.filter(isVid).length+' içerik';
-  buildReel(allP);
-}).catch(function(){
-  document.getElementById('photoCount').textContent='0 içerik';
-  document.getElementById('videoCount').textContent='0 içerik';
-  buildReel([]);
-});
-function buildReel(items){
+}).catch(function(){['playBtn','playBtn2'].forEach(function(id){var el=document.getElementById(id);if(el)el.addEventListener('click',function(){showToast('Showreel yakında!')})})});
+fetch('/data/brands.json').then(function(r){return r.json()}).then(function(data){
+  allBrands=data.items||[];
+  document.getElementById('photoCount').textContent=allBrands.filter(function(b){return b.type==='photo'}).length+' klasör';
+  document.getElementById('videoCount').textContent=allBrands.filter(function(b){return b.type==='video'}).length+' klasör';
+  buildReel(allBrands);
+}).catch(function(){document.getElementById('photoCount').textContent='0 klasör';document.getElementById('videoCount').textContent='0 klasör'});
+function buildReel(brands){
   var track=document.getElementById('reelTrack');
-  if(!items.length){track.parentElement.style.display='none';return}
-  var doubled=items.concat(items);
-  track.innerHTML=doubled.map(function(p){
-    var vid=p.image&&/\.(mp4|mov|webm)$/i.test(p.image);
-    var bg=catBg[p.category]||catBg.video;
-    var em=catEm[p.category]||'🎬';
-    var ti=JSON.stringify(p.title),no=JSON.stringify(p.note||''),im=JSON.stringify(p.image||'');
-    return '<div class="reel-card" onclick="openLb('+ti+','+no+','+im+','+vid+')">'+(p.image?(vid?'<video class="reel-video" src="'+p.image+'" autoplay muted loop playsinline></video>':'<img class="reel-media" src="'+p.image+'" alt="'+p.title+'" loading="lazy">'):'<div class="reel-ph" style="background:'+bg+'">'+em+'</div>')+'<div class="reel-info"><div class="reel-title">'+p.title+'</div><div class="reel-cat">'+(isPhoto(p)?'Fotoğraf':'Video')+'</div></div>'+(vid?'<div class="reel-play"><svg width="10" height="10" viewBox="0 0 24 24"><polygon points="6,3 21,12 6,21" fill="#000"/></svg></div>':'')+'</div>';
+  var all=[];brands.forEach(function(b){(b.items||[]).forEach(function(it){all.push({image:it.image,caption:it.caption||'',brandName:b.name,type:b.type})})});
+  if(!all.length){track.parentElement.style.display='none';return}
+  var d=all.concat(all);
+  track.innerHTML=d.map(function(it){
+    var vid=isVidUrl(it.image);
+    return '<div class="reel-card">'+(it.image?(vid?'<video class="reel-video" src="'+it.image+'" autoplay muted loop playsinline></video>':'<img class="reel-media" src="'+it.image+'" loading="lazy" alt="">'):'<div class="reel-ph">'+(it.type==='photo'?'📸':'🎬')+'</div>')+'<div class="reel-info"><div class="reel-title">'+it.brandName+'</div><div class="reel-cat">'+(it.type==='photo'?'Fotoğraf':'Video')+'</div></div></div>';
   }).join('');
 }
-function openFolder(type){
-  var items=allP.filter(type==='photo'?isPhoto:isVid);
-  document.getElementById('fmodalTitleEm').textContent=type==='photo'?'Fotoğraflar':'Videolar';
-  document.getElementById('fmodalCount').textContent=items.length+' içerik';
-  var grid=document.getElementById('fmodalGrid');
-  if(!items.length){grid.innerHTML='<div class="fmodal-empty">Henüz içerik eklenmedi.<br>Admin panelinden ekleyebilirsiniz.</div>';}
-  else{grid.innerHTML=items.map(function(p){
-    var vid=p.image&&/\.(mp4|mov|webm)$/i.test(p.image);
-    var h=p.height||260;
-    var bg=catBg[p.category]||catBg.video;
-    var em=catEm[p.category]||'📷';
-    var ti=JSON.stringify(p.title),no=JSON.stringify(p.note||''),im=JSON.stringify(p.image||'');
-    return '<div class="fmodal-item" onclick="openLb('+ti+','+no+','+im+','+vid+')">'+(p.image?(vid?'<video class="fmodal-thumb" style="height:'+h+'px" src="'+p.image+'" autoplay muted loop playsinline></video>':'<img class="fmodal-thumb" style="height:'+h+'px" src="'+p.image+'" alt="'+p.title+'" loading="lazy">'):'<div class="fmodal-ph" style="height:'+h+'px;background:'+bg+'">'+em+'</div>')+'<div class="fmodal-ov"><div class="fmodal-t">'+p.title+'</div><div class="fmodal-n">"'+(p.note||'')+'"</div></div></div>';
-  }).join('');}
-  document.getElementById('fmodal').classList.add('open');
+function openTypeModal(type){
+  var brands=allBrands.filter(function(b){return b.type===type});
+  document.getElementById('typeModalTitle').textContent=type==='photo'?'Fotoğraflar':'Videolar';
+  document.getElementById('typeModalCount').textContent=brands.length+' klasör';
+  var grid=document.getElementById('brandGrid');
+  if(!brands.length){grid.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:80px 20px;font-family:Cormorant Garamond,serif;font-size:22px;color:var(--dim);font-style:italic">Henüz klasör eklenmedi.</div>';}
+  else{
+    grid.innerHTML=brands.map(function(b,i){
+      return '<div class="brand-card" onclick="openGallery('+i+',\''+type+'\')"><div class="brand-cover'+(b.cover?'" style="background-image:url('+b.cover+');background-size:cover;background-position:center':'-ph')+'">'+(b.cover?'':'(b.type===\'photo\'?\'📷\':\'🎬\')')+'</div><div class="brand-overlay"></div><div class="brand-info"><div class="brand-name">'+b.name+'</div><div class="brand-meta"><div class="brand-dot"></div>'+(b.items||[]).length+' içerik</div></div></div>';
+    }).join('');
+  }
+  document.getElementById('typeModal').classList.add('open');
   document.body.style.overflow='hidden';
 }
-function closeFolder(){document.getElementById('fmodal').classList.remove('open');document.body.style.overflow=''}
-document.getElementById('fmodal').addEventListener('click',function(e){if(e.target===this)closeFolder()});
-function openLb(title,note,img,vid){
-  var thumb=document.getElementById('lbThumb');
-  if(img){thumb.innerHTML=vid?'<video src="'+img+'" autoplay muted loop playsinline controls style="width:100%;height:100%;object-fit:cover;border-radius:14px"></video>':'<img src="'+img+'" alt="'+title+'" style="width:100%;height:100%;object-fit:cover;border-radius:14px">';thumb.style.background='';}
-  else{thumb.innerHTML=vid?'🎬':'📷';thumb.style.background='#1a1a1a';}
-  document.getElementById('lbTitle').textContent=title||'';
-  document.getElementById('lbNote').textContent=note?'"'+note+'"':'';
-  document.getElementById('lb').classList.add('open');
-  document.body.style.overflow='hidden';
+function closeTypeModal(){document.getElementById('typeModal').classList.remove('open');document.body.style.overflow=''}
+function openGallery(idx,type){
+  var brands=allBrands.filter(function(b){return b.type===type});
+  var brand=brands[idx];if(!brand)return;
+  currentBrandItems=brand.items||[];
+  document.getElementById('galleryBrandName').textContent=brand.name;
+  document.getElementById('galleryCount').textContent=currentBrandItems.length+' içerik';
+  var grid=document.getElementById('galleryGrid');
+  if(!currentBrandItems.length){grid.innerHTML='<div class="gallery-empty">Bu klasörde henüz içerik yok.</div>';}
+  else{grid.innerHTML=currentBrandItems.map(function(it,i){var vid=isVidUrl(it.image);return '<div class="gallery-item" onclick="openLb('+i+')">'+(it.image?(vid?'<video class="gallery-video" src="'+it.image+'" autoplay muted loop playsinline></video>':'<img class="gallery-img" src="'+it.image+'" loading="lazy" alt="">'):'<div class="gallery-ph">'+(brand.type==='photo'?'📸':'🎬')+'</div>')+(it.caption?'<div class="gallery-item-ov"><div class="gallery-caption">'+it.caption+'</div></div>':'')+'</div>'}).join('');}
+  document.getElementById('galleryModal').classList.add('open');
 }
-function closeLb(){var lb=document.getElementById('lb');lb.classList.remove('open');var v=lb.querySelector('video');if(v)v.pause();document.body.style.overflow=''}
+function closeGalleryModal(){var gm=document.getElementById('galleryModal');gm.classList.remove('open');gm.querySelectorAll('video').forEach(function(v){v.pause()})}
+function openLb(idx){lbItems=currentBrandItems;lbIdx=idx;renderLb();document.getElementById('lb').classList.add('open')}
+function renderLb(){
+  var it=lbItems[lbIdx];if(!it)return;
+  var vid=isVidUrl(it.image);
+  var med=document.getElementById('lbMedia');
+  med.innerHTML=it.image?(vid?'<video src="'+it.image+'" autoplay muted loop playsinline controls style="max-width:100%;max-height:75vh;border-radius:14px"></video>':'<img src="'+it.image+'" style="max-width:100%;max-height:75vh;object-fit:contain;border-radius:14px" alt="">'):'<div style="padding:60px;font-size:60px">'+(vid?'🎬':'📸')+'</div>';
+  document.getElementById('lbCaption').textContent=it.caption||'';
+}
+function lbNav(dir){lbIdx=(lbIdx+dir+lbItems.length)%lbItems.length;document.getElementById('lbMedia').querySelectorAll('video').forEach(function(v){v.pause()});renderLb()}
+function closeLb(){var lb=document.getElementById('lb');lb.classList.remove('open');lb.querySelectorAll('video').forEach(function(v){v.pause()})}
 document.getElementById('lb').addEventListener('click',function(e){if(e.target===this)closeLb()});
+document.addEventListener('keydown',function(e){if(e.key==='ArrowRight')lbNav(1);else if(e.key==='ArrowLeft')lbNav(-1);else if(e.key==='Escape'){closeLb();closeGalleryModal();closeTypeModal()}});
 var ts=0;
-document.getElementById('lb').addEventListener('touchstart',function(e){ts=e.touches[0].clientY},{passive:true});
-document.getElementById('lb').addEventListener('touchend',function(e){if(e.changedTouches[0].clientY-ts>60)closeLb()},{passive:true});
+document.getElementById('lb').addEventListener('touchstart',function(e){ts=e.touches[0].clientX},{passive:true});
+document.getElementById('lb').addEventListener('touchend',function(e){var dx=e.changedTouches[0].clientX-ts;if(Math.abs(dx)>50)lbNav(dx<0?1:-1)},{passive:true});
 var cur=document.getElementById('cursor'),ring=document.getElementById('cursor-ring');
-if(cur&&ring){var mx=0,my=0,rx=0,ry=0;document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});document.querySelectorAll('a,button,.folder-card,.reel-card,.fmodal-item').forEach(function(el){el.addEventListener('mouseenter',function(){cur.classList.add('hov')});el.addEventListener('mouseleave',function(){cur.classList.remove('hov')})});function raf(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(raf)}raf()}
+if(cur&&ring){var mx=0,my=0,rx=0,ry=0;document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});document.querySelectorAll('a,button,.folder-card,.brand-card,.gallery-item,.reel-card').forEach(function(el){el.addEventListener('mouseenter',function(){cur.classList.add('hov')});el.addEventListener('mouseleave',function(){cur.classList.remove('hov')})});function raf(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(raf)}raf()}
 window.addEventListener('scroll',function(){document.getElementById('nav').classList.toggle('scrolled',scrollY>60)},{passive:true});
 var burger=document.getElementById('burger'),mm=document.getElementById('mobileMenu');
 burger.addEventListener('click',function(){burger.classList.toggle('open');mm.classList.toggle('open');document.body.style.overflow=mm.classList.contains('open')?'hidden':''});
@@ -443,9 +475,7 @@ document.querySelectorAll('.mmlink').forEach(function(a){a.addEventListener('cli
 var obs=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting)x.target.classList.add('vis')})},{threshold:.08});
 document.querySelectorAll('.rev').forEach(function(el){obs.observe(el)});
 document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){var t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'})}})});
-var tt;
-function showToast(msg){var t=document.getElementById('toast');t.textContent=msg;t.style.opacity='1';clearTimeout(tt);tt=setTimeout(function(){t.style.opacity='0'},2800)}
-document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeLb();closeFolder()}});
+var tt;function showToast(msg){var t=document.getElementById('toast');t.textContent=msg;t.style.opacity='1';clearTimeout(tt);tt=setTimeout(function(){t.style.opacity='0'},2800)}
 if(window.netlifyIdentity){window.netlifyIdentity.on('init',function(user){if(!user)window.netlifyIdentity.on('login',function(){document.location.href='/admin/'})})}
 </script>
 </body>
