@@ -21,7 +21,7 @@ collections:
             widget: "list"
             summary: "{{fields.name}} ({{fields.type}})"
             fields:
-              - {label: "Klasör Adı", name: "name", widget: "string", hint: "Örn: Nike, Zara, Marka A"}
+              - {label: "Klasör Adı", name: "name", widget: "string"}
               - label: "Tür"
                 name: "type"
                 widget: "select"
@@ -53,4 +53,5 @@ collections:
           - {label: "Şehir", name: "city", widget: "string"}
           - {label: "Instagram", name: "instagram", widget: "string", required: false}
           - {label: "Vimeo", name: "vimeo", widget: "string", required: false}
-          - {label: "Logo Görseli", name: - {label: "Hakkımızda Görseli", name: "aboutImage", widget: "image", required: false, hint: "Sol taraftaki büyük çerçevede görünecek fotoğraf"}
+          - {label: "Logo Görseli", name: "logoImage", widget: "image", required: false}
+          - {label: "Hakkımızda Görseli", name: "aboutImage", widget: "image", required: false}
