@@ -28,11 +28,29 @@
     {
       "name": "Crowne Plaza",
       "type": "video",
-      "cover": "",
+      "cover": "/images/uploads/images.jpeg",
       "items": [
         {
           "image": "https://res.cloudinary.com/dccxfj7yq/video/upload/v1776981762/crowne_plaza_t887pl.mov",
           "caption": ""
+        }
+      ]
+    },
+    {
+      "name": "Cafe Craft",
+      "type": "video",
+      "items": [
+        {
+          "image": "/images/uploads/cafe_craft_logo-rgb-1-.png"
+        },
+        {
+          "image": "https://res.cloudinary.com/dccxfj7yq/video/upload/v1776989221/craft_20_s%CC%A7ubat_2_fj16mz.mov"
+        },
+        {
+          "image": "https://res.cloudinary.com/dccxfj7yq/video/upload/v1776989226/craft_13_nisan_1_igdl6b.mov"
+        },
+        {
+          "image": "https://res.cloudinary.com/dccxfj7yq/video/upload/v1776989229/craft_18_ocak_bh1mf2.mov"
         }
       ]
     }
