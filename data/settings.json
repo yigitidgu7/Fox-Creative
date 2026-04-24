@@ -1,12 +1,12 @@
 {
-  "slogan": "Ekipman değil, vizyon.",
+  "vimeo": "",
+  "city": "İstanbul, Türkiye",
   "heroDesc": "Biz sadece video çekmiyoruz. Işığı yönetiyor, anı kurguluyoruz ve markanın ruhunu sinematik bir dille anlatıyoruz.",
+  "phone": "+90 500 123 45 67",
+  "aboutImage": "/images/uploads/hf_20260424_011701_be49e228-385f-4692-8c57-bfa84e552b24.png",
+  "logoImage": "/images/uploads/fox-beyaz.png",
+  "instagram": "",
   "showreelUrl": "",
   "email": "merhaba@foxcreative.co",
-  "phone": "+90 500 123 45 67",
-  "city": "İstanbul, Türkiye",
-  "instagram": "",
-  "vimeo": "",
-  "logoImage": "",
-  "aboutImage": ""
+  "slogan": "Ekipman değil, vizyon."
 }
